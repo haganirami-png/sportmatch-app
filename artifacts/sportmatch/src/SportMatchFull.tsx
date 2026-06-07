@@ -1526,32 +1526,34 @@ export default function App() {
                   {/* luxury glow orbs */}
                   <div style={{ position:"absolute", top:-40, right:-30, width:180, height:180, borderRadius:"50%", background:"rgba(23,201,100,0.07)", filter:"blur(48px)", pointerEvents:"none" }}/>
                   <div style={{ position:"absolute", bottom:-30, left:-20, width:120, height:120, borderRadius:"50%", background:"rgba(21,151,255,0.06)", filter:"blur(36px)", pointerEvents:"none" }}/>
-                  <div style={{ position:"relative" }}>
-                    {/* eyebrow label */}
-                    <div style={{ display:"flex", alignItems:"center", gap:7, marginBottom:10 }}>
-                      <div style={{ width:18, height:2, borderRadius:2, background:`linear-gradient(90deg,${C.green},${C.teal})` }}/>
-                      <span style={{ fontSize:11, fontWeight:700, letterSpacing:"1.2px", textTransform:"uppercase", color:C.teal, opacity:0.85 }}>קרוב אליך · היום</span>
+                  <div style={{ position:"relative", display:"flex", justifyContent:"space-between", alignItems:"flex-end", gap:12 }}>
+                    {/* title block — right (RTL natural) */}
+                    <div style={{ textAlign:"right" }}>
+                      {/* eyebrow label */}
+                      <div style={{ display:"flex", alignItems:"center", justifyContent:"flex-end", gap:7, marginBottom:10 }}>
+                        <span style={{ fontSize:11, fontWeight:700, letterSpacing:"1.2px", textTransform:"uppercase", color:C.teal, opacity:0.85 }}>קרוב אליך · היום</span>
+                        <div style={{ width:18, height:2, borderRadius:2, background:`linear-gradient(90deg,${C.teal},${C.green})` }}/>
+                      </div>
+                      {/* main title */}
+                      <div style={{ fontSize:32, fontWeight:900, lineHeight:1.1, letterSpacing:"-0.5px" }}>
+                        <span style={{ background:`linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>מצא </span>
+                        <span style={{ background:`linear-gradient(135deg, ${C.green} 0%, ${C.teal} 100%)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>מאמן</span>
+                      </div>
                     </div>
-                    {/* main title */}
-                    <div style={{ fontSize:32, fontWeight:900, lineHeight:1.1, letterSpacing:"-0.5px", marginBottom:20 }}>
-                      <span style={{ background:`linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0.75) 100%)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>מצא </span>
-                      <span style={{ background:`linear-gradient(135deg, ${C.green} 0%, ${C.teal} 100%)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>מאמן</span>
-                    </div>
-                    {/* location pill */}
+                    {/* location pill — left */}
                     <button onClick={() => setShowModal(true)}
                       style={{
-                        display:"inline-flex", alignItems:"center", gap:9,
+                        flexShrink:0, display:"flex", flexDirection:"column", alignItems:"center", gap:6,
                         background: userCity ? `linear-gradient(135deg, rgba(46,207,176,0.12), rgba(23,201,100,0.08))` : "rgba(13,22,30,0.7)",
                         backdropFilter:"blur(16px)",
                         border:`1px solid ${userCity ? C.teal+"55" : "rgba(255,255,255,0.1)"}`,
-                        borderRadius:50, padding:"11px 20px",
+                        borderRadius:18, padding:"12px 14px",
                         cursor:"pointer", fontFamily:"inherit",
                         boxShadow: userCity ? `0 0 20px rgba(46,207,176,0.15), inset 0 1px 0 rgba(255,255,255,0.05)` : `0 2px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04)`,
                         transition:"all 0.22s",
                       }}>
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill={userCity ? C.teal : "rgba(255,255,255,0.45)"}><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                      <span style={{ fontSize:13, fontWeight:700, color: userCity ? C.teal : "rgba(255,255,255,0.55)", letterSpacing:"0.2px" }}>{userCity || "בחר מיקום"}</span>
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={userCity ? C.teal : "rgba(255,255,255,0.3)"} strokeWidth="2.5" strokeLinecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill={userCity ? C.teal : "rgba(255,255,255,0.4)"}><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                      <span style={{ fontSize:11, fontWeight:700, color: userCity ? C.teal : "rgba(255,255,255,0.45)", letterSpacing:"0.3px", whiteSpace:"nowrap" }}>{userCity || "בחר מיקום"}</span>
                     </button>
                   </div>
                 </div>
