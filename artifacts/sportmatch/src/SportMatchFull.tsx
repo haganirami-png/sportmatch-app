@@ -268,7 +268,7 @@ function CoachCard({ coach, userCoords, onClick }) {
 function Carousel({ coaches, userCoords, onSelect }) {
   const ref = useRef(null);
   const [active, setActive] = useState(0);
-  const CARD_W = 158 + 14;
+  const CARD_W = 158 + 24;
 
   // Sort by rating * reviews for ranking — logic untouched
   const ranked = [...coaches].sort((a,b) => (b.rating*b.reviews) - (a.rating*a.reviews));
@@ -297,14 +297,14 @@ function Carousel({ coaches, userCoords, onSelect }) {
           flex-shrink: 0;
           position: relative;
           overflow: visible;
-          margin-left: 14px;
+          margin-left: 24px;
           scroll-snap-align: start;
         }
-        .nf-wrap:last-child { margin-left: 20px; }
+        .nf-wrap:last-child { margin-left: 24px; }
         .nf-num {
           position: absolute;
           bottom: 44px;
-          left: -28px;
+          left: -38px;
           font-size: 70px;
           font-weight: 900;
           line-height: 1;
