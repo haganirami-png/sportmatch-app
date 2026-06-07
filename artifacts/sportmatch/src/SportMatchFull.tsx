@@ -303,14 +303,14 @@ function Carousel({ coaches, userCoords, onSelect }) {
           flex-shrink: 0;
           position: relative;
           overflow: visible;
-          margin-left: 24px;
+          margin-left: 30px;
           scroll-snap-align: start;
         }
         .nf-wrap:last-child { margin-left: 24px; }
         .nf-num {
           position: absolute;
           bottom: 44px;
-          left: -38px;
+          left: -18px;
           font-size: 70px;
           font-weight: 900;
           line-height: 1;
