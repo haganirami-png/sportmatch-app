@@ -275,8 +275,18 @@ function Carousel({ coaches, userCoords, onSelect }) {
   const rankMap: Record<number,number> = {};
   ranked.forEach((c,i) => rankMap[c.id] = i+1);
 
-  // Display sorted strictly by rank — #1 first in DOM = rightmost in RTL
-  const displayCoaches = [...coaches].sort((a,b) => rankMap[a.id] - rankMap[b.id]);
+  // Split by photo, both groups sorted by original rank
+  const byRank = [...coaches].sort((a,b) => rankMap[a.id] - rankMap[b.id]);
+  const withPhoto = byRank.filter(c => c.photo);
+  const noPhoto   = byRank.filter(c => !c.photo);
+
+  // Reassign visible display numbers: photo coaches get 1,2,3…; no-photo continue after
+  const visibleRank: Record<number,number> = {};
+  withPhoto.forEach((c,i) => { visibleRank[c.id] = i + 1; });
+  noPhoto.forEach((c,i)   => { visibleRank[c.id] = withPhoto.length + i + 1; });
+
+  // Photo coaches first (rightmost in RTL), then no-photo at the end
+  const displayCoaches = [...withPhoto, ...noPhoto];
   const total = displayCoaches.length;
 
   return (
@@ -347,7 +357,7 @@ function Carousel({ coaches, userCoords, onSelect }) {
                 className="nf-wrap"
                 style={{ zIndex: total - i, ['--card-i' as string]: i } as React.CSSProperties}
               >
-                <span className="nf-num">{rankMap[c.id]}</span>
+                <span className="nf-num">{visibleRank[c.id]}</span>
                 <CoachCard coach={c} userCoords={userCoords} onClick={onSelect}/>
               </div>
             ))
