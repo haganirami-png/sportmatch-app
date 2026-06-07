@@ -1591,25 +1591,72 @@ export default function App() {
                       `}</style>
 
                       {/* ── STATS BAR ── */}
-                      <div style={{ margin:"0 20px 20px", borderRadius:20, overflow:"hidden", position:"relative" }}>
-                        <div style={{ background:`linear-gradient(135deg, #0D2E1E 0%, #071828 50%, #1A0A2E 100%)`, padding:"18px 20px", position:"relative" }}>
-                          {/* glow orbs */}
-                          <div style={{ position:"absolute", top:-20, right:-20, width:100, height:100, borderRadius:"50%", background:`${C.green}22`, filter:"blur(30px)", pointerEvents:"none" }}/>
-                          <div style={{ position:"absolute", bottom:-20, left:-20, width:80, height:80, borderRadius:"50%", background:`${C.blue}22`, filter:"blur(25px)", pointerEvents:"none" }}/>
-                          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:0, position:"relative" }}>
-                            {[
-                              { val:filtered.length, label:"מאמנים", color:C.teal, icon:"👥", delay:"0s" },
-                              { val:`₪${avgPrice}`, label:"ממוצע", color:C.green, icon:"💵", delay:"0.08s" },
-                              { val:`${avgRating}`, label:"דירוג", color:"#F7DC6F", icon:"⭐", delay:"0.16s" },
-                            ].map(({ val, label, color, icon, delay }, i) => (
-                              <div key={label} style={{ textAlign:"center", padding:"4px 0", borderRight: i<2 ? `1px solid rgba(255,255,255,0.08)` : "none", animation:`statPop 0.4s ${delay} both` }}>
-                                <div style={{ fontSize:11, marginBottom:4 }}>{icon}</div>
-                                <div style={{ fontSize:22, fontWeight:900, color, lineHeight:1 }}>{val}</div>
-                                <div style={{ fontSize:10, color:"rgba(255,255,255,0.4)", marginTop:3 }}>{label}</div>
-                              </div>
-                            ))}
+                      <div style={{ margin:"0 20px 22px", display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
+                        {[
+                          {
+                            val: filtered.length,
+                            label: "מאמנים",
+                            color: C.teal,
+                            glow: "rgba(46,207,176,0.18)",
+                            border: "rgba(46,207,176,0.22)",
+                            delay: "0s",
+                            icon: (
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                              </svg>
+                            ),
+                          },
+                          {
+                            val: `₪${avgPrice}`,
+                            label: "ממוצע",
+                            color: "#2ECFB0",
+                            glow: "rgba(23,201,100,0.16)",
+                            border: "rgba(23,201,100,0.2)",
+                            delay: "0.07s",
+                            icon: (
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                              </svg>
+                            ),
+                          },
+                          {
+                            val: avgRating,
+                            label: "דירוג",
+                            color: "#FFD700",
+                            glow: "rgba(255,215,0,0.15)",
+                            border: "rgba(255,215,0,0.22)",
+                            delay: "0.14s",
+                            icon: (
+                              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                              </svg>
+                            ),
+                          },
+                        ].map(({ val, label, color, glow, border, delay, icon }) => (
+                          <div key={label}
+                            style={{
+                              background: `linear-gradient(145deg, rgba(13,22,30,0.9), rgba(8,16,24,0.95))`,
+                              border: `1px solid ${border}`,
+                              borderRadius: 18,
+                              padding: "16px 10px 14px",
+                              textAlign: "center",
+                              position: "relative",
+                              overflow: "hidden",
+                              backdropFilter: "blur(12px)",
+                              boxShadow: `0 4px 24px ${glow}, inset 0 1px 0 rgba(255,255,255,0.04)`,
+                              animation: `statPop 0.38s ${delay} both`,
+                            }}>
+                            {/* subtle glow orb */}
+                            <div style={{ position:"absolute", top:-16, left:"50%", transform:"translateX(-50%)", width:60, height:60, borderRadius:"50%", background:glow, filter:"blur(16px)", pointerEvents:"none" }}/>
+                            {/* icon */}
+                            <div style={{ color, marginBottom:8, display:"flex", justifyContent:"center", opacity:0.85, position:"relative" }}>{icon}</div>
+                            {/* value */}
+                            <div style={{ fontSize:24, fontWeight:900, color, lineHeight:1, letterSpacing:"-0.5px", position:"relative" }}>{val}</div>
+                            {/* label */}
+                            <div style={{ fontSize:10, color:"rgba(255,255,255,0.38)", marginTop:5, fontWeight:500, letterSpacing:"0.4px", textTransform:"uppercase", position:"relative" }}>{label}</div>
                           </div>
-                        </div>
+                        ))}
                       </div>
 
                       {/* ── HIGHLIGHTS ── */}
