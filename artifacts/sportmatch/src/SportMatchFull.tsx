@@ -275,13 +275,8 @@ function Carousel({ coaches, userCoords, onSelect }) {
   const rankMap: Record<number,number> = {};
   ranked.forEach((c,i) => rankMap[c.id] = i+1);
 
-  // Display: real-photo coaches first (UI priority), then by rank within each group
-  const displayCoaches = [...coaches].sort((a,b) => {
-    const aPhoto = a.photo ? 0 : 1;
-    const bPhoto = b.photo ? 0 : 1;
-    if (aPhoto !== bPhoto) return aPhoto - bPhoto;
-    return rankMap[a.id] - rankMap[b.id];
-  });
+  // Display sorted strictly by rank — #1 first in DOM = rightmost in RTL
+  const displayCoaches = [...coaches].sort((a,b) => rankMap[a.id] - rankMap[b.id]);
   const total = displayCoaches.length;
 
   return (
