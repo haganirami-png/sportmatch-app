@@ -293,7 +293,13 @@ function Carousel({ coaches, userCoords, onSelect }) {
           scroll-behavior: smooth;
         }
         .netflix-rtl::-webkit-scrollbar { display: none; }
+        @keyframes nf-enter {
+          from { opacity: 0; transform: translateX(36px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
         .nf-wrap {
+          animation: nf-enter 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+          animation-delay: calc(var(--card-i, 0) * 38ms);
           flex-shrink: 0;
           position: relative;
           overflow: visible;
@@ -339,7 +345,7 @@ function Carousel({ coaches, userCoords, onSelect }) {
               <div
                 key={c.id}
                 className="nf-wrap"
-                style={{ zIndex: total - i }}
+                style={{ zIndex: total - i, ['--card-i' as string]: i } as React.CSSProperties}
               >
                 <span className="nf-num">{rankMap[c.id]}</span>
                 <CoachCard coach={c} userCoords={userCoords} onClick={onSelect}/>
