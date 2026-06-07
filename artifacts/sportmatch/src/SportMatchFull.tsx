@@ -258,7 +258,7 @@ function CoachCard({ coach, userCoords, onClick }) {
         <div style={{ fontWeight:800, fontSize:13, color:"#fff", whiteSpace:"nowrap", overflow:"hidden", textOverflow:"ellipsis" }}>{coach.name}</div>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop:4 }}>
           <div style={{ color:"rgba(255,255,255,0.48)", fontSize:10 }}>{km !== null ? `${km} ק״מ` : coach.loc}</div>
-          <div style={{ color:"#2ECFB0", fontWeight:900, fontSize:13 }}>₪{coach.price+FEE}</div>
+          <div style={{ color:"#2ECFB0", fontWeight:900, fontSize:13 }}>{coach.price+FEE}₪</div>
         </div>
       </div>
     </div>
@@ -417,7 +417,7 @@ function DetailScreen({ coach, userCoords, onBook, onBack }) {
           ))}
           <div style={{ height:1, background:C.border, margin:"9px 0" }}/>
           <div style={{ display:"flex", justifyContent:"space-between", fontWeight:900, fontSize:22 }}>
-            <span>סה״כ</span><span style={{ color:C.teal }}>₪{coach.price+FEE}</span>
+            <span>סה״כ</span><span style={{ color:C.teal }}>{coach.price+FEE}₪</span>
           </div>
           <div style={{ marginTop:10, background:C.tealGlow, border:`1px solid ${C.teal}33`, borderRadius:10, padding:"8px 12px", textAlign:"center", color:C.teal, fontSize:12, fontWeight:700 }}>
             חודש ראשון — ללא עמלת פלטפורמה
@@ -468,7 +468,7 @@ function ConfirmScreen({ coach, onDone, onBack }) {
           ))}
           <div style={{ height:1, background:C.border, margin:"9px 0" }}/>
           <div style={{ display:"flex", justifyContent:"space-between", fontWeight:900, fontSize:22 }}>
-            <span>לתשלום</span><span style={{ color:C.teal }}>₪{coach.price+FEE}</span>
+            <span>לתשלום</span><span style={{ color:C.teal }}>{coach.price+FEE}₪</span>
           </div>
         </div>
       </div>
@@ -1349,7 +1349,7 @@ function AllCoachesScreen({ coaches, userCoords, onSelect, onBack }) {
                 </div>
               </div>
               <div style={{ textAlign:"left", flexShrink:0 }}>
-                <div style={{ color:C.teal, fontWeight:900, fontSize:17 }}>₪{c.price+FEE}</div>
+                <div style={{ color:C.teal, fontWeight:900, fontSize:17 }}>{c.price+FEE}₪</div>
                 <div style={{ color:"#F7DC6F", fontSize:11, marginTop:2 }}>⭐ {c.rating}</div>
                 {km!==null && <div style={{ color:C.muted, fontSize:10, marginTop:1 }}>{km} ק״מ</div>}
               </div>
@@ -1608,16 +1608,14 @@ export default function App() {
                             ),
                           },
                           {
-                            val: `₪${avgPrice}`,
+                            val: `${avgPrice}₪`,
                             label: "ממוצע",
                             color: "#2ECFB0",
                             glow: "rgba(23,201,100,0.16)",
                             border: "rgba(23,201,100,0.2)",
                             delay: "0.07s",
                             icon: (
-                              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                              </svg>
+                              <span style={{ fontSize:17, fontWeight:900, fontFamily:"Arial, sans-serif", lineHeight:1 }}>₪</span>
                             ),
                           },
                           {
@@ -1670,7 +1668,7 @@ export default function App() {
                         <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
                           {[
                             { badge:"🔥", title:"הכי פופולרי", coach:mostReviewed, sub:`${mostReviewed.reviews} ביקורות`, grad:`linear-gradient(135deg,#FF4500,#FF8C00)`, delay:"0s" },
-                            { badge:"💰", title:"הכי משתלם",   coach:cheapest,     sub:`₪${cheapest.price+FEE} לאימון`,   grad:`linear-gradient(135deg,#00B09B,#17C964)`, delay:"0.06s" },
+                            { badge:"💰", title:"הכי משתלם",   coach:cheapest,     sub:`${cheapest.price+FEE}₪ לאימון`,   grad:`linear-gradient(135deg,#00B09B,#17C964)`, delay:"0.06s" },
                             { badge:"📍", title:"הכי קרוב",    coach:closest,      sub:userCoords?`${Math.round(dist(userCoords.lat,userCoords.lng,closest.lat,closest.lng)*10)/10} ק״מ ממך`:closest.loc, grad:`linear-gradient(135deg,#1597FF,#A855F7)`, delay:"0.12s" },
                           ].map(({ badge, title, coach, sub, grad, delay }) => {
                             const m = SPORT_META[coach.sport];
@@ -1690,7 +1688,7 @@ export default function App() {
                                   <div style={{ color:C.muted, fontSize:11, marginTop:1 }}>{sub}</div>
                                 </div>
                                 <div style={{ textAlign:"left", flexShrink:0 }}>
-                                  <div style={{ fontWeight:900, fontSize:16, background:grad, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>₪{coach.price+FEE}</div>
+                                  <div style={{ fontWeight:900, fontSize:16, background:grad, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{coach.price+FEE}₪</div>
                                   <div style={{ color:"#F7DC6F", fontSize:11, marginTop:2 }}>⭐ {coach.rating}</div>
                                 </div>
                               </button>
